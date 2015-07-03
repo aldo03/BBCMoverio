@@ -10,11 +10,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.matteoaldini.bbcmoverio.R;
+import com.example.matteoaldini.bbcmoverio.TreasureAdapter;
 import com.example.matteoaldini.bbcmoverio.bluetooth.AcceptThread;
+import com.example.matteoaldini.bbcmoverio.model.Match;
+import com.example.matteoaldini.bbcmoverio.model.TreasureChest;
 
 
 public class MainActivity extends Activity {
@@ -22,6 +29,11 @@ public class MainActivity extends Activity {
     private TextView latText;
     private TextView longText;
     private Handler handler;
+    private Match match;
+    private Button button;
+    private ListView listView;
+    private ScrollView scrollView;
+    private boolean show;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +41,49 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         Log.i("entrato", "non attivo");
+        this.show = false;
         this.latText = (TextView)findViewById(R.id.latText);
         this.longText = (TextView)findViewById(R.id.longText);
-        handler = new Handler(){
+        this.button = (Button)findViewById(R.id.treasuresButton);
+        this.listView = (ListView)findViewById(R.id.listView);
+        this.scrollView = (ScrollView)findViewById(R.id.scrollView);
+        this.scrollView.setVisibility(View.INVISIBLE);
+        this.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!show){
+                    show = true;
+                    listView.setAdapter(new TreasureAdapter(match.getTreasures(), getApplicationContext()));
+                    scrollView.setVisibility(View.VISIBLE);
+                } else {
+                    show = false;
+                    scrollView.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        this.handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
-                String retString = (String)msg.obj;
-                String[] s = retString.split("/");
-                latText.setText((s[0]));
-                longText.setText((s[1]));
+                switch (msg.what){
+                    case 0:
+                        matchReceived((Match) msg.obj);
+                        break;
+                    case 1:
+                        treasureReceived((TreasureChest) msg.obj);
+                        break;
+                    case 2:
+                        confirmOrRefuseMsgReceived((Boolean) msg.obj);
+                        break;
+                    case 3:
+                        moneyTheftReceived((Integer) msg.obj);
+                        break;
+                    case 4:
+                        newAmountReceived((Integer) msg.obj);
+                        break;
+                }
             }
         };
+
         /*if (!mBluetoothAdapter.isEnabled()) {
             Log.i("entrato", "non attivo");
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -48,8 +92,34 @@ public class MainActivity extends Activity {
             AcceptThread thread = new AcceptThread(handler);
             thread.start();
         }*/
-        Toast.makeText(this, "prova toast",Toast.LENGTH_LONG).show();
+    }
 
+    private void matchReceived(Match match){
+        this.match = match;
+        Toast.makeText(this, "Match Received!!!",Toast.LENGTH_LONG).show();
+    }
+
+    private void treasureReceived(TreasureChest treasureChest){
+        this.match.updateTreasureChest(treasureChest);
+        Toast.makeText(this, "Treasure Chest updated!!!",Toast.LENGTH_LONG).show();
+    }
+
+    private void confirmOrRefuseMsgReceived(boolean confirm){
+        if(confirm){
+            Toast.makeText(this, "Cooperation confirmed",Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(this, "Cooperation refused",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void moneyTheftReceived(int amount){
+        Toast.makeText(this, "You were robbed!!!",Toast.LENGTH_LONG).show();
+        this.match.dimPoints(amount);
+    }
+
+    private void newAmountReceived(int amount){
+        Toast.makeText(this, "Amount updated!!!",Toast.LENGTH_LONG).show();
+        this.match.dimMaxPoints(amount);
     }
 
     @Override
