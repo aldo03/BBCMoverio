@@ -49,13 +49,8 @@ public class ConnectedThread extends Thread {
             try {
                 // Read from the InputStream
                 bytes = mmInStream.read(buffer);
-                // Send the obtained bytes to the UI activity
-                /*mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer)
-                        .sendToTarget();*/
                 String str = new String(buffer, 0, bytes, "UTF-8");
                 this.receiveMessage(str);
-                this.handler.obtainMessage(1,str).sendToTarget();
-                //this.listener.setLabel(str);
             } catch (IOException e) {
                 break;
             } catch (JSONException e) {
@@ -89,6 +84,9 @@ public class ConnectedThread extends Thread {
                 messageType=4;
                 object = ParserUtils.getNewAmount(jsonObject);
                 break;
+            case 5:
+                messageType=5;
+                object = ParserUtils.getPosition(jsonObject);
         }
         this.handler.obtainMessage(messageType,object).sendToTarget();
         return object;

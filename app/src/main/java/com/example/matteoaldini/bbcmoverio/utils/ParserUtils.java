@@ -1,6 +1,7 @@
 package com.example.matteoaldini.bbcmoverio.utils;
 
 import com.example.matteoaldini.bbcmoverio.model.Match;
+import com.example.matteoaldini.bbcmoverio.model.Position;
 import com.example.matteoaldini.bbcmoverio.model.TreasureChest;
 
 import org.json.JSONArray;
@@ -18,8 +19,8 @@ import java.util.Set;
 public class ParserUtils {
     public static TreasureChest getTreasureChestFromJSONObject(JSONObject jsonObject) throws JSONException {
         TreasureChest treasureChest = new TreasureChest(jsonObject.getInt("number"),
-        jsonObject.getLong("latitude"),
-        jsonObject.getLong("longitude"),
+        jsonObject.getDouble("latitude"),
+        jsonObject.getDouble("longitude"),
         jsonObject.getInt("money"));
         return treasureChest;
     }
@@ -53,5 +54,10 @@ public class ParserUtils {
         }else {
             return false;
         }
+    }
+
+    public static Position getPosition(JSONObject jsonObject) throws JSONException {
+        Position position = new Position(jsonObject.getDouble("latitude"),jsonObject.getDouble("longitude"));
+        return position;
     }
 }

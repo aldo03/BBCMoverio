@@ -5,8 +5,8 @@ package com.example.matteoaldini.bbcmoverio.model;
  */
 public class TreasureChest {
     private int number;
-    private long latitude;
-    private long longitude;
+    private double latitude;
+    private double longitude;
     private int money;
     public enum State{
         UNVISITED, OPEN, LOCKED_KEY, LOCKED_COOPERATION, FINAL;
@@ -14,7 +14,7 @@ public class TreasureChest {
     State state;
 
 
-    public TreasureChest(int number, long latitude, long longitude, int money) {
+    public TreasureChest(int number, double latitude, double longitude, int money) {
         this.number = number;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -30,7 +30,7 @@ public class TreasureChest {
         this.number = number;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -38,7 +38,7 @@ public class TreasureChest {
         this.latitude = latitude;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 

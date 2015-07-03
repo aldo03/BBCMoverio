@@ -39,8 +39,8 @@
         android:id="@+id/imageView"
         android:src="@drawable/coin"
         android:layout_above="@+id/treasuresButton"
-        android:layout_toLeftOf="@+id/textView"
-        android:layout_toStartOf="@+id/textView"
+        android:layout_toLeftOf="@+id/totalAmount"
+        android:layout_toStartOf="@+id/totalAmount"
         android:layout_marginBottom="20dp" />
 
     <TextView
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/textView"
+        android:id="@+id/totalAmount"
         android:layout_alignBottom="@+id/imageView"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -68,10 +68,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/textView2"
+        android:id="@+id/points"
         android:layout_alignBottom="@+id/treasuresButton"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
+        android:layout_alignLeft="@+id/totalAmount"
+        android:layout_alignStart="@+id/totalAmount"
         android:layout_marginBottom="20dp" />
 
     <ScrollView

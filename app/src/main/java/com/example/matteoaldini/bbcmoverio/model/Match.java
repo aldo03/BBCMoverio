@@ -52,4 +52,12 @@ public class Match {
     public List<TreasureChest> getTreasures(){
         return this.treasureChests;
     }
+
+    public int getMaxPoints() {
+        return maxPoints;
+    }
+
+    public int getPoints() {
+        return points;
+    }
 }

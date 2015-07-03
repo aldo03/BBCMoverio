@@ -21,6 +21,7 @@ import com.example.matteoaldini.bbcmoverio.R;
 import com.example.matteoaldini.bbcmoverio.TreasureAdapter;
 import com.example.matteoaldini.bbcmoverio.bluetooth.AcceptThread;
 import com.example.matteoaldini.bbcmoverio.model.Match;
+import com.example.matteoaldini.bbcmoverio.model.Position;
 import com.example.matteoaldini.bbcmoverio.model.TreasureChest;
 
 
@@ -28,6 +29,8 @@ public class MainActivity extends Activity {
     private final static int REQUEST_ENABLE_BT = 10;
     private TextView latText;
     private TextView longText;
+    private TextView totalText;
+    private TextView pointsText;
     private Handler handler;
     private Match match;
     private Button button;
@@ -44,6 +47,8 @@ public class MainActivity extends Activity {
         this.show = false;
         this.latText = (TextView)findViewById(R.id.latText);
         this.longText = (TextView)findViewById(R.id.longText);
+        this.totalText = (TextView) findViewById(R.id.totalAmount);
+        this.pointsText = (TextView) findViewById(R.id.points);
         this.button = (Button)findViewById(R.id.treasuresButton);
         this.listView = (ListView)findViewById(R.id.listView);
         this.scrollView = (ScrollView)findViewById(R.id.scrollView);
@@ -80,6 +85,8 @@ public class MainActivity extends Activity {
                     case 4:
                         newAmountReceived((Integer) msg.obj);
                         break;
+                    case 5:
+                        positionReceived((Position) msg.obj);
                 }
             }
         };
@@ -94,8 +101,15 @@ public class MainActivity extends Activity {
         }*/
     }
 
+    private void positionReceived(Position obj) {
+        this.latText.setText(""+obj.getLatitude());
+        this.longText.setText(""+obj.getLongitude());
+    }
+
     private void matchReceived(Match match){
         this.match = match;
+        this.totalText.setText(this.match.getMaxPoints());
+        this.pointsText.setText(this.match.getPoints());
         Toast.makeText(this, "Match Received!!!",Toast.LENGTH_LONG).show();
     }
 
@@ -115,11 +129,13 @@ public class MainActivity extends Activity {
     private void moneyTheftReceived(int amount){
         Toast.makeText(this, "You were robbed!!!",Toast.LENGTH_LONG).show();
         this.match.dimPoints(amount);
+        this.totalText.setText(this.match.getMaxPoints());
     }
 
     private void newAmountReceived(int amount){
         Toast.makeText(this, "Amount updated!!!",Toast.LENGTH_LONG).show();
         this.match.dimMaxPoints(amount);
+        this.totalText.setText(this.match.getMaxPoints());
     }
 
     @Override
