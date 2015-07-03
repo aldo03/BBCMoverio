@@ -1,5 +1,6 @@
 package com.example.matteoaldini.bbcmoverio.activity;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Handler;
@@ -16,7 +17,7 @@ import com.example.matteoaldini.bbcmoverio.R;
 import com.example.matteoaldini.bbcmoverio.bluetooth.AcceptThread;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
     private final static int REQUEST_ENABLE_BT = 10;
     private TextView latText;
     private TextView longText;

@@ -37,7 +37,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/imageView"
-        android:src="@drawable/coin_clip_art_acq7ygzcM"
+        android:src="@drawable/coin"
         android:layout_above="@+id/button"
         android:layout_toLeftOf="@+id/textView"
         android:layout_toStartOf="@+id/textView"
@@ -58,7 +58,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/imageView2"
-        android:src="@drawable/coin_clip_art_acq7ygzcM"
+        android:src="@drawable/coin"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/imageView"
         android:layout_alignStart="@+id/imageView" />
