@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.matteoaldini.bbcmoverio.R;
 import com.example.matteoaldini.bbcmoverio.bluetooth.AcceptThread;
@@ -38,22 +39,23 @@ public class MainActivity extends ActionBarActivity {
                 longText.setText((s[1]));
             }
         };
-        if (!mBluetoothAdapter.isEnabled()) {
+        /*if (!mBluetoothAdapter.isEnabled()) {
             Log.i("entrato", "non attivo");
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }else {
             AcceptThread thread = new AcceptThread(handler);
             thread.start();
-        }
+        }*/
+        Toast.makeText(this, "prova toast",Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        AcceptThread thread = new AcceptThread(handler);
-        thread.start();
+        /*AcceptThread thread = new AcceptThread(handler);
+        thread.start();*/
     }
 
     @Override
