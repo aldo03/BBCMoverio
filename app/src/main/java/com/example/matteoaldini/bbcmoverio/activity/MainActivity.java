@@ -92,6 +92,8 @@ public class MainActivity extends Activity {
                         break;
                     case 5:
                         positionReceived((Position) msg.obj);
+                    case 6:
+                        treasureReceivedNotPresent((TreasureChest) msg.obj);
                 }
             }
         };
@@ -104,6 +106,13 @@ public class MainActivity extends Activity {
             AcceptThread thread = new AcceptThread(handler);
             thread.start();
         }
+    }
+
+    private void treasureReceivedNotPresent(TreasureChest treasureChest) {
+        String s = this.match.updateTreasureChestNotPresent(treasureChest);
+        this.totalText.setText(""+this.match.getMaxPoints());
+        this.pointsText.setText(""+this.match.getPoints());
+        Toast.makeText(this, s,Toast.LENGTH_LONG).show();
     }
 
     private void positionReceived(Position obj) {

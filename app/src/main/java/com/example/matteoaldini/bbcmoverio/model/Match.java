@@ -26,7 +26,8 @@ public class Match {
     public String updateTreasureChest(TreasureChest treasureChest){
         int i = 0;
         for(TreasureChest t : treasureChests){
-            if(t.getNumber() == treasureChest.getNumber()){
+            if(t.getLatitude() == treasureChest.getLatitude()
+                    &&t.getLongitude() == treasureChest.getLongitude()){
                 treasureChests.set(i, treasureChest);
                 Log.i("STATE", treasureChest.getState().toString());
                 return this.getMessageFromUpdate(treasureChest);
@@ -42,11 +43,11 @@ public class Match {
                 this.points+=treasureChest.getMoney();
                 return "Treasure n."+treasureChest.getNumber()+" opened!!! "+treasureChest.getMoney()+" earned!!";
             case LOCKED_KEY:
-                return "FAIL";
+                return "Treasure n."+treasureChest.getNumber()+" needs key"+treasureChest.getNumber()+"!!!";
             case LOCKED_COOPERATION:
-                return "FAIL";
+                return "Treasure n."+treasureChest.getNumber()+" needs cooperation. Wait until your friend asks your request";
             case FINAL:
-                return "FAIL";
+                return "You have finished the game!!!";
         }
         return null;
     }
@@ -81,5 +82,34 @@ public class Match {
 
     public int getPoints() {
         return points;
+    }
+
+    public String updateTreasureChestNotPresent(TreasureChest treasureChest) {
+        int i = 0;
+        for(TreasureChest t : treasureChests){
+            if(t.getLatitude() == treasureChest.getLatitude()
+                    &&t.getLongitude() == treasureChest.getLongitude()){
+                treasureChests.set(i, treasureChest);
+                Log.i("STATE", treasureChest.getState().toString());
+                return this.getMessageFromUpdateNotPresent(treasureChest);
+            }
+            i++;
+        }
+        return "FAIL";
+    }
+
+    private String getMessageFromUpdateNotPresent(TreasureChest treasureChest) {
+        switch (treasureChest.state){
+            case OPEN:
+                this.points+=treasureChest.getMoney();
+                return "Treasure n."+treasureChest.getNumber()+" opened by your friend!!! "+treasureChest.getMoney()+" earned!!";
+            case LOCKED_KEY:
+                return "Treasure n."+treasureChest.getNumber()+" found by your friend, needs key"+treasureChest.getNumber()+"!!!";
+            case LOCKED_COOPERATION:
+                return "Your friend needs cooperation!!!";
+            case FINAL:
+                return "You have finished the game!!!";
+        }
+        return null;
     }
 }

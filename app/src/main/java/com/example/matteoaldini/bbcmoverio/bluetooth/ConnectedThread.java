@@ -87,6 +87,9 @@ public class ConnectedThread extends Thread {
             case 5:
                 messageType=5;
                 object = ParserUtils.getPosition(jsonObject);
+            case 6:
+                messageType=6;
+                object = ParserUtils.getTreasureChestFromJSONObject(jsonObject);
         }
         this.handler.obtainMessage(messageType,object).sendToTarget();
         return object;
