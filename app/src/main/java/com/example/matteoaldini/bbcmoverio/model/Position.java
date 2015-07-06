@@ -19,4 +19,11 @@ public class Position {
     public double getLongitude() {
         return longitude;
     }
+
+    public double getDistance(Position position) {
+        return Math
+                .sqrt(Math.pow((position.getLatitude() - this.latitude), 2.0)
+                        + Math.pow((position.getLongitude() - this.longitude),
+                        2.0));
+    }
 }

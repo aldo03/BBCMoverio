@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
     private ListView listView;
     private ScrollView scrollView;
     private boolean show;
+    private TextView nearTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,8 @@ public class MainActivity extends Activity {
         this.listView = (ListView)findViewById(R.id.listView);
         this.scrollView = (ScrollView)findViewById(R.id.scrollView);
         this.scrollView.setVisibility(View.INVISIBLE);
+        this.nearTextView = (TextView) findViewById(R.id.nearTextView);
+        this.nearTextView.setVisibility(View.INVISIBLE);
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +109,18 @@ public class MainActivity extends Activity {
     private void positionReceived(Position obj) {
         this.latText.setText(""+obj.getLatitude());
         this.longText.setText(""+obj.getLongitude());
+        boolean found = false;
+        for(TreasureChest t: this.match.getTreasures()){
+            Position p = new Position(t.getLatitude(), t.getLongitude());
+            if(p.getDistance(obj)<0.0002){
+                found = true;
+                this.nearTextView.setText("You are near a Treasure Chest");
+                this.nearTextView.setVisibility(View.VISIBLE);
+            }
+        }
+        if(!found){
+            this.nearTextView.setVisibility(View.INVISIBLE);
+        }
         Log.i("",""+obj.getLatitude());
     }
 
