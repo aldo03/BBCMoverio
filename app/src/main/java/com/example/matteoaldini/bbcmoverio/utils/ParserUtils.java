@@ -21,7 +21,7 @@ public class ParserUtils {
         TreasureChest treasureChest = new TreasureChest(jsonObject.getInt("number"),
         jsonObject.getDouble("latitude"),
         jsonObject.getDouble("longitude"),
-        jsonObject.getInt("money"));
+        jsonObject.getInt("money"), jsonObject.getInt("state"));
         return treasureChest;
     }
 
@@ -33,7 +33,7 @@ public class ParserUtils {
         List<TreasureChest> treasureChestSet = new ArrayList<>();
         for(int i=0; i<treasureArray.length();i++){
             JSONObject object = treasureArray.getJSONObject(i);
-            TreasureChest treasureChest = new TreasureChest(0, object.getLong("latitude"), object.getLong("longitude"), 0);
+            TreasureChest treasureChest = new TreasureChest(0, object.getLong("latitude"), object.getLong("longitude"), 0,0);
             treasureChestSet.add(treasureChest);
         }
         match.setTreasureChests(treasureChestSet);

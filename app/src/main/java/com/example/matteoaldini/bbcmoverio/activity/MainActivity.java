@@ -60,9 +60,11 @@ public class MainActivity extends Activity {
                     show = true;
                     listView.setAdapter(new TreasureAdapter(match.getTreasures(), getApplicationContext()));
                     scrollView.setVisibility(View.VISIBLE);
+                    listView.setVisibility(View.VISIBLE);
                 } else {
                     show = false;
                     scrollView.setVisibility(View.INVISIBLE);
+                    listView.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -114,7 +116,7 @@ public class MainActivity extends Activity {
     }
 
     private void treasureReceived(TreasureChest treasureChest){
-        this.match.updateTreasureChest(treasureChest);
+        String s = this.match.updateTreasureChest(treasureChest);
         Toast.makeText(this, "Treasure Chest updated!!!",Toast.LENGTH_LONG).show();
     }
 

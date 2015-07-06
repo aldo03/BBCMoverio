@@ -21,12 +21,15 @@ public class Match {
         this.treasureChests = treasureChests;
     }
 
-    public void updateTreasureChest(TreasureChest treasureChest){
+    public String updateTreasureChest(TreasureChest treasureChest){
+        int i = 0;
         for(TreasureChest t : treasureChests){
             if(t.getNumber() == treasureChest.getNumber()){
-                t=treasureChest;
+                treasureChests.set(i,treasureChest);
             }
+            i++;
         }
+        return null;
     }
 
     public void setMaxPoints(int maxPoints){

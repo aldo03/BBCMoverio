@@ -9,17 +9,18 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/lat"
-        android:layout_alignBottom="@+id/colorImg"
+        android:layout_alignTop="@+id/longitude"
         android:layout_toRightOf="@+id/colorImg"
-        android:layout_toEndOf="@+id/colorImg"
-        android:layout_marginLeft="62dp"
-        android:layout_marginStart="62dp" />
+        android:layout_toEndOf="@+id/colorImg" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/colorImg"
-        android:src="#ffff1f15" />
+        android:src="#ffff1f15"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,9 +28,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/longitude"
-        android:layout_alignTop="@+id/lat"
+        android:layout_alignBottom="@+id/colorImg"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="193dp"
-        android:layout_marginEnd="193dp" />
+        android:layout_marginRight="146dp"
+        android:layout_marginEnd="146dp" />
 </RelativeLayout>
