@@ -1,5 +1,7 @@
 package com.example.matteoaldini.bbcmoverio.model;
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.Set;
 
@@ -25,9 +27,26 @@ public class Match {
         int i = 0;
         for(TreasureChest t : treasureChests){
             if(t.getNumber() == treasureChest.getNumber()){
-                treasureChests.set(i,treasureChest);
+                treasureChests.set(i, treasureChest);
+                Log.i("STATE", treasureChest.getState().toString());
+                return this.getMessageFromUpdate(treasureChest);
             }
             i++;
+        }
+        return "FAIL";
+    }
+
+    private String getMessageFromUpdate(TreasureChest treasureChest) {
+        switch (treasureChest.state){
+            case OPEN:
+                this.points+=treasureChest.getMoney();
+                return "Treasure n."+treasureChest.getNumber()+" opened!!! "+treasureChest.getMoney()+" earned!!";
+            case LOCKED_KEY:
+                return "FAIL";
+            case LOCKED_COOPERATION:
+                return "FAIL";
+            case FINAL:
+                return "FAIL";
         }
         return null;
     }

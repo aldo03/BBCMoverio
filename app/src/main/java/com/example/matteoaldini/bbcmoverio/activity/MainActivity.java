@@ -112,13 +112,15 @@ public class MainActivity extends Activity {
     private void matchReceived(Match match){
         this.match = match;
         this.totalText.setText(""+this.match.getMaxPoints());
-        this.pointsText.setText(""+this.match.getPoints());
+        this.pointsText.setText("" + this.match.getPoints());
         Toast.makeText(this, "Match Received!!!",Toast.LENGTH_LONG).show();
     }
 
     private void treasureReceived(TreasureChest treasureChest){
         String s = this.match.updateTreasureChest(treasureChest);
-        Toast.makeText(this, "Treasure Chest updated!!!",Toast.LENGTH_LONG).show();
+        this.totalText.setText(""+this.match.getMaxPoints());
+        this.pointsText.setText(""+this.match.getPoints());
+        Toast.makeText(this, s,Toast.LENGTH_LONG).show();
     }
 
     private void confirmOrRefuseMsgReceived(boolean confirm){
@@ -129,13 +131,13 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void moneyTheftReceived(int amount){
+    private void moneyTheftReceived(int amount) {
         Toast.makeText(this, "You were robbed!!!",Toast.LENGTH_LONG).show();
         this.match.dimPoints(amount);
         this.totalText.setText(this.match.getMaxPoints());
     }
 
-    private void newAmountReceived(int amount){
+    private void newAmountReceived(int amount) {
         Toast.makeText(this, "Amount updated!!!",Toast.LENGTH_LONG).show();
         this.match.dimMaxPoints(amount);
         this.totalText.setText(this.match.getMaxPoints());
