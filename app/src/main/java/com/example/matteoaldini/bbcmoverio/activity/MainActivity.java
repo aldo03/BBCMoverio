@@ -112,7 +112,7 @@ public class MainActivity extends Activity {
         boolean found = false;
         for(TreasureChest t: this.match.getTreasures()){
             Position p = new Position(t.getLatitude(), t.getLongitude());
-            if(p.getDistance(obj)<0.0002){
+            if(p.getDistance(obj)<0.02){
                 found = true;
                 this.nearTextView.setText("You are near a Treasure Chest");
                 this.nearTextView.setVisibility(View.VISIBLE);
