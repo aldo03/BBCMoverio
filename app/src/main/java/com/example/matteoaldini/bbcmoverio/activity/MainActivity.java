@@ -108,8 +108,8 @@ public class MainActivity extends Activity {
 
     private void matchReceived(Match match){
         this.match = match;
-        this.totalText.setText(this.match.getMaxPoints());
-        this.pointsText.setText(this.match.getPoints());
+        this.totalText.setText(""+this.match.getMaxPoints());
+        this.pointsText.setText(""+this.match.getPoints());
         Toast.makeText(this, "Match Received!!!",Toast.LENGTH_LONG).show();
     }
 
