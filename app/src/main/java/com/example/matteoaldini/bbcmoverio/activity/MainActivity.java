@@ -91,14 +91,14 @@ public class MainActivity extends Activity {
             }
         };
 
-        /*if (!mBluetoothAdapter.isEnabled()) {
+        if (!mBluetoothAdapter.isEnabled()) {
             Log.i("entrato", "non attivo");
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }else {
             AcceptThread thread = new AcceptThread(handler);
             thread.start();
-        }*/
+        }
     }
 
     private void positionReceived(Position obj) {
