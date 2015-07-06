@@ -14,28 +14,12 @@ public class TreasureChest {
     State state;
 
 
-    public TreasureChest(int number, double latitude, double longitude, int money, int state) {
+    public TreasureChest(int number, double latitude, double longitude, int money, String state) {
         this.number = number;
         this.latitude = latitude;
         this.longitude = longitude;
         this.money = money;
-        switch (state){
-            case 0:
-                this.state = State.UNVISITED;
-                break;
-            case 1:
-                this.state = State.OPEN;
-                break;
-            case 2:
-                this.state = State.LOCKED_KEY;
-                break;
-            case 3:
-                this.state = State.LOCKED_COOPERATION;
-                break;
-            case 4:
-                this.state = State.FINAL;
-                break;
-        }
+        this.state = State.valueOf(state);
     }
 
     public int getNumber() {

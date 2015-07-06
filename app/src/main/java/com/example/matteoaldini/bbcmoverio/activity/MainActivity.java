@@ -106,6 +106,7 @@ public class MainActivity extends Activity {
     private void positionReceived(Position obj) {
         this.latText.setText(""+obj.getLatitude());
         this.longText.setText(""+obj.getLongitude());
+        Log.i("",""+obj.getLatitude());
     }
 
     private void matchReceived(Match match){

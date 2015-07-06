@@ -92,8 +92,8 @@
         android:layout_alignTop="@+id/scrollView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/scrollView"
-        android:layout_alignEnd="@+id/scrollView"
-        android:layout_alignBottom="@+id/scrollView" />
+        android:layout_alignBottom="@+id/scrollView"
+        android:layout_toLeftOf="@+id/imageView"
+        android:layout_toStartOf="@+id/imageView" />
 
 </RelativeLayout>
