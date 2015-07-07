@@ -96,6 +96,9 @@ public class ConnectedThread extends Thread {
                 messageType=7;
                 object = ParserUtils.getAlertToShow(jsonObject);
                 break;
+            case 8:
+                messageType=8;
+                object = ParserUtils.getMoneyTheft(jsonObject);
         }
         this.handler.obtainMessage(messageType,object).sendToTarget();
         return object;

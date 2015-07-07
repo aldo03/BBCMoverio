@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!show) {
+                if(!show){
                     show = true;
                     listView.setAdapter(new TreasureAdapter(match.getTreasures(), getApplicationContext()));
                     scrollView.setVisibility(View.VISIBLE);
@@ -120,6 +120,9 @@ public class MainActivity extends Activity {
                         break;
                     case 7:
                         alertReceived((String) msg.obj);
+                    case 8:
+                        moneyTheftReceivedNotMe((Integer) msg.obj);
+                        break;
                 }
             }
         };
@@ -132,6 +135,12 @@ public class MainActivity extends Activity {
             this.btThread = new AcceptThread(handler);
             btThread.start();
         }
+    }
+
+    private void moneyTheftReceivedNotMe(Integer obj) {
+        Toast.makeText(this, "Your friend were robbed!!!",Toast.LENGTH_LONG).show();
+        this.match.setPoints(obj);
+        this.pointsText.setText(""+this.match.getPoints());
     }
 
     private void alertReceived(String obj) {
