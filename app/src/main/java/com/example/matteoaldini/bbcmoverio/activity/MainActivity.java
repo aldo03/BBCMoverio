@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!show){
+                if (!show) {
                     show = true;
                     listView.setAdapter(new TreasureAdapter(match.getTreasures(), getApplicationContext()));
                     scrollView.setVisibility(View.VISIBLE);
@@ -118,6 +118,8 @@ public class MainActivity extends Activity {
                     case 6:
                         treasureReceivedNotPresent((TreasureChest) msg.obj);
                         break;
+                    case 7:
+                        alertReceived((String) msg.obj);
                 }
             }
         };
@@ -130,6 +132,10 @@ public class MainActivity extends Activity {
             this.btThread = new AcceptThread(handler);
             btThread.start();
         }
+    }
+
+    private void alertReceived(String obj) {
+        Toast.makeText(this, "ALERT:"+obj,Toast.LENGTH_LONG).show();
     }
 
     private void treasureReceivedNotPresent(TreasureChest treasureChest) {
