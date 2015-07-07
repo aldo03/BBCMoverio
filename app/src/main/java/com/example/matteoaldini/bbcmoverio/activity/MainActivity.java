@@ -99,8 +99,10 @@ public class MainActivity extends Activity {
                         break;
                     case 5:
                         positionReceived((Position) msg.obj);
+                        break;
                     case 6:
                         treasureReceivedNotPresent((TreasureChest) msg.obj);
+                        break;
                 }
             }
         };
@@ -193,14 +195,14 @@ public class MainActivity extends Activity {
 
     private void moneyTheftReceived(int amount) {
         Toast.makeText(this, "You were robbed!!!",Toast.LENGTH_LONG).show();
-        this.match.dimPoints(amount);
-        this.totalText.setText(this.match.getMaxPoints());
+        this.match.setMaxPoints(amount);
+        this.totalText.setText(""+this.match.getMaxPoints());
     }
 
     private void newAmountReceived(int amount) {
         Toast.makeText(this, "Amount updated!!!",Toast.LENGTH_LONG).show();
-        this.match.dimMaxPoints(amount);
-        this.totalText.setText(this.match.getMaxPoints());
+        this.match.setMaxPoints(amount);
+        this.totalText.setText("" + this.match.getMaxPoints());
     }
 
     @Override

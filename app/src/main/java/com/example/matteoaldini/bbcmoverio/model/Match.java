@@ -61,15 +61,11 @@ public class Match {
     }
 
     public void dimMaxPoints(int amount){
-        this.maxPoints-=amount;
+        this.maxPoints=amount;
     }
 
     public void addPoints(int points){
         this.points+=points;
-    }
-
-    public void dimPoints(int points){
-        this.points-=points;
     }
 
     public List<TreasureChest> getTreasures(){
