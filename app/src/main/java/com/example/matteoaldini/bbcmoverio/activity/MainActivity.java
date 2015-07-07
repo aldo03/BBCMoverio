@@ -195,8 +195,8 @@ public class MainActivity extends Activity {
 
     private void moneyTheftReceived(int amount) {
         Toast.makeText(this, "You were robbed!!!",Toast.LENGTH_LONG).show();
-        this.match.setMaxPoints(amount);
-        this.totalText.setText(""+this.match.getMaxPoints());
+        this.match.setPoints(amount);
+        this.pointsText.setText(""+this.match.getPoints());
     }
 
     private void newAmountReceived(int amount) {
