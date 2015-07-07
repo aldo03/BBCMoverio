@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
     private Handler handler;
     private Match match;
     private Button button;
+    private Button alertButton;
     private ListView listView;
     private ScrollView scrollView;
     private boolean show;
@@ -58,6 +59,7 @@ public class MainActivity extends Activity {
         this.totalText = (TextView) findViewById(R.id.totalAmount);
         this.pointsText = (TextView) findViewById(R.id.points);
         this.button = (Button)findViewById(R.id.treasuresButton);
+        this.alertButton = (Button) findViewById(R.id.alertButton);
         this.listView = (ListView)findViewById(R.id.listView);
         this.scrollView = (ScrollView)findViewById(R.id.scrollView);
         this.scrollView.setVisibility(View.INVISIBLE);
@@ -75,6 +77,19 @@ public class MainActivity extends Activity {
                     show = false;
                     scrollView.setVisibility(View.INVISIBLE);
                     listView.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        this.alertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    btThread.getConnection().sendAlertToSmartphone("Danger Zone!!!");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         });

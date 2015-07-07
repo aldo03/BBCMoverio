@@ -71,4 +71,11 @@ public class ParserUtils {
         return jsonObject;
     }
 
+    public static JSONObject getAlertJSONObject(String msg) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("messageType", 2);
+        jsonObject.put("message", msg);
+
+        return jsonObject;
+    }
 }

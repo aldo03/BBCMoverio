@@ -103,6 +103,11 @@ public class ConnectedThread extends Thread {
         mmOutStream.write(jsonObject.toString().getBytes());
     }
 
+    public void sendAlertToSmartphone(String msg) throws IOException, JSONException {
+        JSONObject jsonObject = ParserUtils.getAlertJSONObject(msg);
+        mmOutStream.write(jsonObject.toString().getBytes());
+    }
+
     /* Call this from the main activity to shutdown the connection */
     public void cancel() {
         try {
