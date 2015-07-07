@@ -46,8 +46,10 @@ public class TreasureAdapter extends BaseAdapter {
         View rowView = inflater.inflate(R.layout.treasure_layout, parent, false);
         TextView lat = (TextView)rowView.findViewById(R.id.lat);
         TextView longitude = (TextView)rowView.findViewById(R.id.longitude);
+        TextView state = (TextView)rowView.findViewById(R.id.state);
         lat.setText(""+this.treasureChestSet.get(position).getLatitude());
         longitude.setText(""+this.treasureChestSet.get(position).getLongitude());
+        state.setText(this.treasureChestSet.get(position).getState().name());
         return rowView;
     }
 }
