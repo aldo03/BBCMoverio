@@ -118,6 +118,9 @@ public class MainActivity extends Activity {
                     case 6:
                         treasureReceivedNotPresent((TreasureChest) msg.obj);
                         break;
+                    case 8:
+                        moneyTheftReceivedNotMe((Integer) msg.obj);
+                        break;
                 }
             }
         };
@@ -130,6 +133,12 @@ public class MainActivity extends Activity {
             this.btThread = new AcceptThread(handler);
             btThread.start();
         }
+    }
+
+    private void moneyTheftReceivedNotMe(Integer obj) {
+        Toast.makeText(this, "Your friend were robbed!!!",Toast.LENGTH_LONG).show();
+        this.match.setPoints(obj);
+        this.pointsText.setText(""+this.match.getPoints());
     }
 
     private void treasureReceivedNotPresent(TreasureChest treasureChest) {
