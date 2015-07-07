@@ -1,7 +1,9 @@
 package com.example.matteoaldini.bbcmoverio.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -24,6 +26,10 @@ import com.example.matteoaldini.bbcmoverio.model.Match;
 import com.example.matteoaldini.bbcmoverio.model.Position;
 import com.example.matteoaldini.bbcmoverio.model.TreasureChest;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 
 public class MainActivity extends Activity {
     private final static int REQUEST_ENABLE_BT = 10;
@@ -38,6 +44,7 @@ public class MainActivity extends Activity {
     private ScrollView scrollView;
     private boolean show;
     private TextView nearTextView;
+    private AcceptThread btThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,13 +110,42 @@ public class MainActivity extends Activity {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }else {
-            AcceptThread thread = new AcceptThread(handler);
-            thread.start();
+            this.btThread = new AcceptThread(handler);
+            btThread.start();
         }
     }
 
     private void treasureReceivedNotPresent(TreasureChest treasureChest) {
         String s = this.match.updateTreasureChestNotPresent(treasureChest);
+        if(s.equals("COOPERATION")){
+            new AlertDialog.Builder(getApplicationContext())
+                    .setTitle("Cooperation request for treasure chest "+treasureChest.getNumber())
+                    .setPositiveButton("Accept",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                btThread.getConnection().sendResponseToSmartphone("OK");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    })
+                    .setNegativeButton("Refuse", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                btThread.getConnection().sendResponseToSmartphone("KO");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    })
+                    .show();
+        }
         this.totalText.setText(""+this.match.getMaxPoints());
         this.pointsText.setText(""+this.match.getPoints());
         Toast.makeText(this, s,Toast.LENGTH_LONG).show();

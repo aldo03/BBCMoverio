@@ -106,7 +106,7 @@ public class Match {
             case LOCKED_KEY:
                 return "Treasure n."+treasureChest.getNumber()+" found by your friend, needs key"+treasureChest.getNumber()+"!!!";
             case LOCKED_COOPERATION:
-                return "Your friend needs cooperation!!!";
+                return "COOPERATION";
             case FINAL:
                 return "You have finished the game!!!";
         }

@@ -60,4 +60,15 @@ public class ParserUtils {
         Position position = new Position(jsonObject.getDouble("latitude"),jsonObject.getDouble("longitude"));
         return position;
     }
+
+    //SEND TO SMARTPHONE PARSERS
+
+    public static JSONObject getResponseJSONObject(String toSend) throws JSONException{
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("messageType", 1);
+        jsonObject.put("response", toSend);
+
+        return jsonObject;
+    }
+
 }

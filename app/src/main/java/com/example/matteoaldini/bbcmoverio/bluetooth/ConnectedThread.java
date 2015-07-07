@@ -96,10 +96,9 @@ public class ConnectedThread extends Thread {
     }
 
     /* Call this from the main activity to send data to the remote device */
-    public void write(byte[] bytes) {
-        try {
-            mmOutStream.write(bytes);
-        } catch (IOException e) { }
+    public void sendResponseToSmartphone(String response) throws JSONException, IOException {
+        JSONObject jsonObject = ParserUtils.getResponseJSONObject(response);
+        mmOutStream.write(jsonObject.toString().getBytes());
     }
 
     /* Call this from the main activity to shutdown the connection */

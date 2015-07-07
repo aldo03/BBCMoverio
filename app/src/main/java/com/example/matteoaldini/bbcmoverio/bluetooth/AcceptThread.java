@@ -10,6 +10,7 @@ import android.os.Handler;
 
 public class AcceptThread extends Thread {
     private BluetoothServerSocket mmServerSocket;
+    private ConnectedThread thread;
     private final static String stringUUID = "90bebbb2-051f-11e5-a6c0-1697f925ec7b";
     private final static String name = "test";
     private UUID MY_UUID;
@@ -53,8 +54,12 @@ public class AcceptThread extends Thread {
     }
 
     private void manageConnectedSocket(BluetoothSocket socket){
-        ConnectedThread thread = new ConnectedThread(socket, handler);
+        this.thread = new ConnectedThread(socket, handler);
         thread.run();
+    }
+
+    public ConnectedThread getConnection(){
+        return this.thread;
     }
 
     /** Will cancel the listening socket, and cause the thread to finish */
