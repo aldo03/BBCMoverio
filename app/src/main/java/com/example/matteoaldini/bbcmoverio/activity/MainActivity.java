@@ -119,6 +119,8 @@ public class MainActivity extends Activity {
                     case 6:
                         treasureReceivedNotPresent((TreasureChest) msg.obj);
                         break;
+                    case 7:
+                        alertReceived((String) msg.obj);
                     case 8:
                         moneyTheftReceivedNotMe((Integer) msg.obj);
                         break;
@@ -140,6 +142,10 @@ public class MainActivity extends Activity {
         Toast.makeText(this, "Your friend were robbed!!!",Toast.LENGTH_LONG).show();
         this.match.setPoints(obj);
         this.pointsText.setText(""+this.match.getPoints());
+    }
+
+    private void alertReceived(String obj) {
+        Toast.makeText(this, "ALERT:"+obj,Toast.LENGTH_LONG).show();
     }
 
     private void treasureReceivedNotPresent(TreasureChest treasureChest) {

@@ -92,6 +92,10 @@ public class ConnectedThread extends Thread {
                 messageType=6;
                 object = ParserUtils.getTreasureChestFromJSONObject(jsonObject);
                 break;
+            case 7:
+                messageType=7;
+                object = ParserUtils.getAlertToShow(jsonObject);
+                break;
             case 8:
                 messageType=8;
                 object = ParserUtils.getMoneyTheft(jsonObject);

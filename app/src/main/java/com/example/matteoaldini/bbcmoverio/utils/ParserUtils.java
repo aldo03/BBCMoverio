@@ -86,4 +86,8 @@ public class ParserUtils {
 
         return jsonObject;
     }
+
+    public static String getAlertToShow(JSONObject jsonObject) throws JSONException {
+        return jsonObject.getString("message");
+    }
 }
