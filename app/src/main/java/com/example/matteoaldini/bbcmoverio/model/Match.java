@@ -2,6 +2,7 @@ package com.example.matteoaldini.bbcmoverio.model;
 
 import android.util.Log;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,10 +13,14 @@ public class Match {
     private List<TreasureChest> treasureChests;
     private int points;
     private int maxPoints;
+    private Set<Key> mySetOfKeys;
+    private Set<Key> friendSetOfKeys;
 
     public Match(int points, int maxPoints) {
         this.points=points;
         this.maxPoints=maxPoints;
+        this.mySetOfKeys = new HashSet<>();
+        this.friendSetOfKeys = new HashSet<>();
     }
 
 
@@ -80,6 +85,22 @@ public class Match {
         return points;
     }
 
+    public Set<Key> getMySetOfKeys() {
+        return mySetOfKeys;
+    }
+
+    public void setMySetOfKeys(Set<Key> mySetOfKeys) {
+        this.mySetOfKeys = mySetOfKeys;
+    }
+
+    public Set<Key> getFriendSetOfKeys() {
+        return friendSetOfKeys;
+    }
+
+    public void setFriendSetOfKeys(Set<Key> friendSetOfKeys) {
+        this.friendSetOfKeys = friendSetOfKeys;
+    }
+
     public String updateTreasureChestNotPresent(TreasureChest treasureChest) {
         int i = 0;
         for(TreasureChest t : treasureChests){
@@ -107,5 +128,13 @@ public class Match {
                 return "You have finished the game!!!";
         }
         return null;
+    }
+
+    public void addKeyToFriend(Key key) {
+        this.mySetOfKeys.add(key);
+    }
+
+    public void addKeyToMe(Key key) {
+        this.friendSetOfKeys.add(key);
     }
 }

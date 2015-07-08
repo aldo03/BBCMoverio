@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.matteoaldini.bbcmoverio.R;
 import com.example.matteoaldini.bbcmoverio.TreasureAdapter;
 import com.example.matteoaldini.bbcmoverio.bluetooth.AcceptThread;
+import com.example.matteoaldini.bbcmoverio.model.Key;
 import com.example.matteoaldini.bbcmoverio.model.Match;
 import com.example.matteoaldini.bbcmoverio.model.Position;
 import com.example.matteoaldini.bbcmoverio.model.TreasureChest;
@@ -181,6 +182,10 @@ public class MainActivity extends Activity {
         }
         this.totalText.setText(""+this.match.getMaxPoints());
         this.pointsText.setText(""+this.match.getPoints());
+        if(treasureChest.getKey().getNumberOfChest()!=0){
+            s+=" Key n "+treasureChest.getKey().getNumberOfChest()+"in it";
+            this.match.addKeyToFriend(treasureChest.getKey());
+        }
         Toast.makeText(this, s,Toast.LENGTH_LONG).show();
     }
 
@@ -213,6 +218,10 @@ public class MainActivity extends Activity {
         String s = this.match.updateTreasureChest(treasureChest);
         this.totalText.setText(""+this.match.getMaxPoints());
         this.pointsText.setText(""+this.match.getPoints());
+        if(treasureChest.getKey().getNumberOfChest()!=0){
+            s+=" Key n "+treasureChest.getKey().getNumberOfChest()+"in it";
+            this.match.addKeyToMe(treasureChest.getKey());
+        }
         Toast.makeText(this, s,Toast.LENGTH_LONG).show();
     }
 

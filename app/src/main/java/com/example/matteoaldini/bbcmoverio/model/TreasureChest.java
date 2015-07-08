@@ -8,6 +8,7 @@ public class TreasureChest {
     private double latitude;
     private double longitude;
     private int money;
+    private Key key;
     public enum State{
         UNVISITED, OPEN, LOCKED_KEY, LOCKED_COOPERATION, FINAL;
     }
@@ -60,5 +61,13 @@ public class TreasureChest {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public Key getKey() {
+        return key;
+    }
+
+    public void setKey(Key key) {
+        this.key = key;
     }
 }

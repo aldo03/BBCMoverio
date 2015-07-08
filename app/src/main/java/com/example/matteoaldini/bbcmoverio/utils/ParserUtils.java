@@ -1,5 +1,6 @@
 package com.example.matteoaldini.bbcmoverio.utils;
 
+import com.example.matteoaldini.bbcmoverio.model.Key;
 import com.example.matteoaldini.bbcmoverio.model.Match;
 import com.example.matteoaldini.bbcmoverio.model.Position;
 import com.example.matteoaldini.bbcmoverio.model.TreasureChest;
@@ -21,7 +22,9 @@ public class ParserUtils {
         TreasureChest treasureChest = new TreasureChest(jsonObject.getInt("number"),
         jsonObject.getDouble("latitude"),
         jsonObject.getDouble("longitude"),
-        jsonObject.getInt("money"), jsonObject.getString("state"));
+        jsonObject.getInt("money"),
+        jsonObject.getString("state"));
+        treasureChest.setKey(new Key(jsonObject.getInt("key")));
         return treasureChest;
     }
 
