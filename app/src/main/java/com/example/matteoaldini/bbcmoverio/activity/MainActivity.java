@@ -120,6 +120,7 @@ public class MainActivity extends Activity {
                         break;
                     case 7:
                         alertReceived((String) msg.obj);
+                        break;
                     case 8:
                         moneyTheftReceivedNotMe((Integer) msg.obj);
                         break;

@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.example.matteoaldini.bbcmoverio.utils.ParserUtils;
 
@@ -50,7 +52,19 @@ public class ConnectedThread extends Thread {
                 // Read from the InputStream
                 bytes = mmInStream.read(buffer);
                 String str = new String(buffer, 0, bytes, "UTF-8");
-                this.receiveMessage(str);
+                JSONObject jsonObject = new JSONObject(str);
+                Log.i("RECEIVED", str);
+                if(jsonObject.getInt("messageType")!=0){
+                    int n = 0;
+                    while (n<=str.lastIndexOf("}")) {
+                        String s = str.substring(n, str.indexOf("}",n)+1);
+                        Log.i("RECEIVED", s);
+                        this.receiveMessage(s);
+                        n=str.indexOf("}",n)+1;
+                    }
+                }else {
+                   this.receiveMessage(str);
+                }
             } catch (IOException e) {
                 break;
             } catch (JSONException e) {
@@ -79,6 +93,7 @@ public class ConnectedThread extends Thread {
             case 3:
                 messageType=3;
                 object = ParserUtils.getMoneyTheft(jsonObject);
+                Log.i("Thief",jsonObject.toString());
                 break;
             case 4:
                 messageType=4;
@@ -99,6 +114,7 @@ public class ConnectedThread extends Thread {
             case 8:
                 messageType=8;
                 object = ParserUtils.getMoneyTheft(jsonObject);
+                break;
         }
         this.handler.obtainMessage(messageType,object).sendToTarget();
         return object;
