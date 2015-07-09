@@ -1,8 +1,5 @@
 package com.example.matteoaldini.bbcmoverio.model;
 
-/**
- * Created by lorenzo.righi7 on 03/07/2015.
- */
 public class Position {
     private double latitude;
     private double longitude;
